@@ -14,10 +14,12 @@ namespace CrmWebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private ICustomerCrude customerService = new CustomerCrud();
+
+
         [HttpGet("customers")]
         public List<Customer> GetAllCustomers()
         {
-            CustomerCrud customerService = new CustomerCrud();
             List<Customer> customers = customerService.GetAllCustomers();
             return customers;
         }
@@ -25,7 +27,6 @@ namespace CrmWebApi.Controllers
         [HttpGet("customers/{id}")]
         public  Customer  GetOneCustomers(int id)
         {
-            CustomerCrud customerService = new CustomerCrud();
             Customer customer = customerService.GetCustomerById(id);
             return customer;
         }
@@ -33,19 +34,20 @@ namespace CrmWebApi.Controllers
         [HttpPost("customers")]
         public Customer AddCustomer(CustomerOptions customerOpt)
         { 
-            CustomerCrud customerService = new CustomerCrud();
          return   customerService.CreateCustomer(customerOpt);
-            
         }
 
         [HttpPut("customers/{id}")]
         public Customer UpdateCustomer(CustomerOptions customerOpt, int id)
         {
-            CustomerCrud customerService = new CustomerCrud();
-            return customerService.UpdateCustomer(customerOpt, id);
-
+             return customerService.UpdateCustomer(customerOpt, id);
         }
 
+        [HttpDelete("customers/{id}")]
+        public bool DeleteCustomer( int id)
+        {
+             return customerService.DeleteCustomer(id);
+        }
 
 
     }
