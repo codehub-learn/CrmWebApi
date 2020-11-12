@@ -14,7 +14,7 @@ namespace CrmWebApi.Controllers
     public class OrderController : ControllerBase
     {
 
-        public IOrderService orderService;
+        public IOrderService orderService = new OrderService();
 
         [HttpGet("{id}")]
         public OrderOption getOrder(int id)

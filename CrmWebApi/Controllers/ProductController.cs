@@ -14,7 +14,7 @@ namespace CrmWebApi.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private IProductCrud productService = new ProductCrud();
+        private IProductService productService = new ProductService();
 
         [HttpPost]
         public Product createProduct(ProductOptions ProductOption)

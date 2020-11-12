@@ -7,43 +7,43 @@ using Microsoft.AspNetCore.Mvc;
 using ModelCrm.Models;
 using ModelCrm.Options;
 using ModelCrm.Services;
-
+ 
 namespace CrmWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class CustomerController : ControllerBase
     {
-        private ICustomerCrude customerService = new CustomerCrud();
+        private ICustomerService customerService = new CustomerService();
 
 
-        [HttpGet("customers")]
+        [HttpGet]
         public List<Customer> GetAllCustomers()
         {
             List<Customer> customers = customerService.GetAllCustomers();
             return customers;
         }
 
-        [HttpGet("customers/{id}")]
+        [HttpGet("{id}")]
         public  Customer  GetOneCustomers(int id)
         {
             Customer customer = customerService.GetCustomerById(id);
             return customer;
         }
 
-        [HttpPost("customers")]
+        [HttpPost]
         public Customer AddCustomer(CustomerOptions customerOpt)
         { 
          return   customerService.CreateCustomer(customerOpt);
         }
 
-        [HttpPut("customers/{id}")]
+        [HttpPut("{id}")]
         public Customer UpdateCustomer(CustomerOptions customerOpt, int id)
         {
              return customerService.UpdateCustomer(customerOpt, id);
         }
 
-        [HttpDelete("customers/{id}")]
+        [HttpDelete("{id}")]
         public bool DeleteCustomer( int id)
         {
              return customerService.DeleteCustomer(id);
